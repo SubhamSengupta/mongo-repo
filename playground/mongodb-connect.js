@@ -1,4 +1,4 @@
-const {MongoClient} = require('mongodb');
+const {MongoClient, ObjectID} = require('mongodb');
 
 MongoClient.connect('mongodb://localhost:27017/TodoApp', (err, db) => {
   if(err) {
@@ -25,11 +25,19 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp', (err, db) => {
   //   }
   //   console.log(JSON.stringify(result.ops, undefined, 2));
   // });
-  db.collection('Users').find({name: 'Subham'}).toArray().then((result) => {
-    console.log(JSON.stringify(result, undefined, 2));
-  }, (err) => {
-    console.log('Unable to fetch data from DB',err);
-  });
+
+  // db.collection('Users').find({name: 'Subham'}).toArray().then((result) => {
+  //   console.log(JSON.stringify(result, undefined, 2));
+  // }, (err) => {
+  //   console.log('Unable to fetch data from DB',err);
+//     });
+// db.collection('Users').deleteMany({name: 'Subham'}).then((result) =>{
+//   console.log("Deleted ");
+// });
+// db.collection('Users')
+// .findOneAndDelete({_id: new ObjectID(595653c1d903b35e314f1a2d)}).then((result) =>{
+//   console.log(JSON.stringify(result, undefined, 2));
+// });
 
 
   //db.close();
