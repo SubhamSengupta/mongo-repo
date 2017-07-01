@@ -15,7 +15,7 @@ app.post('/todos', (req, res) => {
   todo.save().then((doc) =>{
     res.send(doc);
   }, (e) => {
-    res.send(e);
+    res.status(400).send(e);
   });
 });
 
@@ -23,3 +23,4 @@ app.post('/todos', (req, res) => {
 app.listen(3000, () => {
   console.log('Server is up on port 3000');
 });
+module.exports = {app};
