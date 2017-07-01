@@ -5,6 +5,8 @@ var {mongoose} = require('./db/mongoose');
 var {ToDo} = require('./models/todo');
 var {Users} = require('./models/users');
 
+const {ObjectID} = require('mongodb');
+
 app = express();
 app.use(bodyParser.json());
 app.post('/todos', (req, res) => {
@@ -25,6 +27,21 @@ app.get('/todos', (req, res) => {
   },(e) => {
     res.status(400).send(e);
   })
+});
+
+app.get('/todos/:id', (req, res) => {
+  var id = req.params.id;
+  if(!ObjectID.isValid(id)){
+    return res.status(400).send('Not a valid ID.');
+  }
+  ToDo.findById(id).then((todo) => {
+    if(!todo){
+      return res.status(400).send('Not found');
+    }
+    res.send(JSON.stringify(todo, undefined, 2));
+  }).catch((e) => {
+    res.status(400).send(e);
+  });
 });
 
 
